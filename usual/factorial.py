@@ -9,6 +9,6 @@ while True:
             fac = sum(nums)
             print(f'Факториал: {fac}')
         else:
-            print('Факториал отрицательного числа или нуля нельзя вычислить!')
+            raise ValueError(0)
     except:
         print('Введите корректные числа!')
