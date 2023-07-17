@@ -1,11 +1,8 @@
 from aiogram import types, Dispatcher
 from create import dp, bot
+from keyboards.client_kb import kb_client, num
 
-HELP = '''/help - список команд
-/work - режим работы
-/location - расположение кафе
-
-Приятного аппетита!'''
+HELP = 'Приятного аппетита!'
 rej = 'Режим работы: любой день недели 8:00 - 20:00'
 rasp = 'Улица Колбасная, 15А'
 ls = 'Пожалуйста, напишите мне в личные сообщения, чтобы я мог с Вами общаться через них и присылать Вам личную информацию!'
@@ -13,7 +10,7 @@ ls = 'Пожалуйста, напишите мне в личные сообще
 
 async def Help(message : types.message):
     try:
-        await bot.send_message(message.from_user.id, HELP)
+        await bot.send_message(message.from_user.id, HELP, reply_markup=kb_client)
         await message.delete()
     except:
         await message.reply(f'{HELP}\n\n{ls}')
@@ -21,18 +18,16 @@ async def Help(message : types.message):
 async def rejim(message : types.message):
     try:
         await bot.send_message(message.from_user.id, rej)
-        await message.delete()
     except:
         await message.reply(f'{rej}\n\n{ls}')
 
 async def ras(message : types.message):
     try:
-        await bot.send_message(message.from_user.id, rasp)
-        await message.delete()
+        await bot.send_message(message.from_user.id, rasp, reply_markup=num)
     except:
         await message.reply(f'{rasp}\n\n{ls}')
 
 def reg(dp : Dispatcher):
-    dp.register_message_handler(Help, commands=['start', 'help'])
-    dp.register_message_handler(rejim, commands=['work'])
-    dp.register_message_handler(ras, commands=['location'])
+    dp.register_message_handler(Help, commands=['start'])
+    dp.register_message_handler(rejim, commands=['режим'])
+    dp.register_message_handler(ras, commands=['место'])
