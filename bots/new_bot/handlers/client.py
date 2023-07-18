@@ -1,6 +1,6 @@
 from aiogram import types, Dispatcher
 from create import dp, bot
-from keyboards.client_kb import kb_client, num
+from keyboards.client_kb import kb_client
 
 HELP = 'Приятного аппетита!'
 rej = 'Режим работы: любой день недели 8:00 - 20:00'
@@ -23,7 +23,7 @@ async def rejim(message : types.message):
 
 async def ras(message : types.message):
     try:
-        await bot.send_message(message.from_user.id, rasp, reply_markup=num)
+        await bot.send_message(message.from_user.id, rasp)
     except:
         await message.reply(f'{rasp}\n\n{ls}')
 
