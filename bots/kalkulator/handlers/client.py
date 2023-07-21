@@ -35,6 +35,13 @@ async def plus(message : types.message):
     elif text == '/пример':
         await bot.send_message(message.from_user.id, 'Введите пример, который вы хотите решить', reply_markup=kb_cancel)
 
+async def cancel(message : types.message, state : FSMContext):
+    now = state.get_state()
+    if now is None:
+        Help()
+    await state.finish()
+    await bot.send_message(message.from_user.id, 'Операция отменена!', reply_markup=kb_user)
+
 async def result(message : types.message, state : FSMContext):
     global text
     while True:
@@ -69,15 +76,8 @@ async def result(message : types.message, state : FSMContext):
             await state.finish()
             break
 
-async def cancel(message : types.message, state : FSMContext):
-    now = state.get_state()
-    if now is None:
-        Help()
-    await state.finish()
-    await bot.send_message(message.from_user.id, 'Операция отменена!', reply_markup=kb_user)
-
 def reg(dp : Dispatcher):
     dp.register_message_handler(help_start, commands=['start'])
     dp.register_message_handler(plus, commands=['сложить', 'вычесть', 'умножить', 'разделить', 'пример'], state=None)
-    dp.register_message_handler(result, state=FSM_res.result)
     dp.register_message_handler(cancel, commands=['отмена'], state='*')
+    dp.register_message_handler(result, state=FSM_res.result)
