@@ -1,6 +1,6 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from create import dp, bot
+from create import bot
 from aiogram import types, Dispatcher
 from keyboards.admin_kb import kb_admin, kb_onload
 
@@ -50,9 +50,6 @@ async def load_price(message : types.message, state : FSMContext):
     await state.finish()
 
 async def cancel(message : types.message, state : FSMContext):
-    now = state.get_state()
-    if now is None:
-        return
     await state.finish()
     await bot.send_message(message.from_user.id, 'Загрузка отменена!', reply_markup=kb_admin)
 

@@ -1,10 +1,8 @@
 from aiogram import types, Dispatcher
-from create import dp
 
-HELP = '''Привет!
-В этом боте ты с легкостью можешь выполнять простые математические действия: сложение, вычитание, умножение и деление
+HELP = '''Команда не найдена!
 
-Чтобы попробовать бота воспользуйся клавиатурой!'''
+Выбери на клавиатуре то, что ты хочешь сделать'''
 
 async def Help(message : types.message):
     await message.reply(HELP)

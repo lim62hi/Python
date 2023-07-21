@@ -1,7 +1,6 @@
 from aiogram import types, Dispatcher
 from string import punctuation
 from json import load
-from create import dp
 
 async def ban_word(message : types.message):
     if {i.lower().translate(str.maketrans('', '', punctuation)) for i in message.text.split()}\

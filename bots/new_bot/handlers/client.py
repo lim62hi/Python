@@ -1,5 +1,5 @@
 from aiogram import types, Dispatcher
-from create import dp, bot
+from create import bot
 from keyboards.client_kb import kb_client
 
 HELP = 'Приятного аппетита!'
