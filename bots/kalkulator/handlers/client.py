@@ -69,6 +69,9 @@ async def result(message : types.message, state : FSMContext):
                     for i in numbers:
                         res /= i
                     await bot.send_message(message.from_user.id, f'Результат деления: {res}', reply_markup=kb_user)
+        except ZeroDivisionError:
+            await message.reply('Делить на ноль нельзя!')
+            await state.reset()
         except:
             await message.reply('Введите корректные числа!')
             await state.reset()
