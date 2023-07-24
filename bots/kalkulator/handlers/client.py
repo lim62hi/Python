@@ -4,6 +4,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from create import bot
 from keyboards.client_kb import kb_user, kb_cancel
 from handlers.other import Help
+from aiogram.dispatcher.filters import Text
 
 text = None
 
@@ -20,10 +21,12 @@ async def help_start(message : types.message):
     await bot.send_message(message.from_user.id, HELP, reply_markup=kb_user)
     await message.delete()
 
-async def plus(message : types.message):
+async def enter(message : types.message):
     await FSM_res.result.set()
     global text 
-    text = message.text
+    text = message.text.lower()
+    if '/' not in text:
+        text = '/' + text
     if text == '/сложить':
         await bot.send_message(message.from_user.id, 'Введите числа, которые вы хотите сложить', reply_markup=kb_cancel)
     elif text == '/вычесть':
@@ -81,6 +84,8 @@ async def result(message : types.message, state : FSMContext):
 
 def reg(dp : Dispatcher):
     dp.register_message_handler(help_start, commands=['start'])
-    dp.register_message_handler(plus, commands=['сложить', 'вычесть', 'умножить', 'разделить', 'пример'], state=None)
+    dp.register_message_handler(enter, commands=['сложить', 'вычесть', 'умножить', 'разделить', 'пример'], state=None)
+    dp.register_message_handler(enter, Text(equals=['сложить', 'вычесть', 'умножить', 'разделить', 'пример'], ignore_case=True), state=None)
     dp.register_message_handler(cancel, commands=['отмена'], state='*')
+    dp.register_message_handler(cancel, Text(equals=['отмена'], ignore_case=True), state='*')
     dp.register_message_handler(result, state=FSM_res.result)
