@@ -18,11 +18,12 @@ async def read_info(id):
     if id == 5221868883:
         for el in cur.execute('SELECT * FROM menu').fetchall():
             await bot.send_photo(id, el[0], f'{el[1]}\nОписание: {el[2]}\nЦена: {el[3]}', reply_markup=\
-                                 InlineKeyboardMarkup().add(InlineKeyboardButton(f'Удалить {el[1]}', callback_data=\
-                                 f'удалить {el[1]}')))
+                                 InlineKeyboardMarkup().row(InlineKeyboardButton(f'Удалить {el[1]}', callback_data=\
+                                 f'удалить {el[1]}'), InlineKeyboardButton('Заказать', callback_data=f'заказать {el[1]}')))
     else:
         for el in cur.execute('SELECT * FROM menu').fetchall():
-            await bot.send_photo(id, el[0], f'{el[1]}\nОписание: {el[2]}\nЦена: {el[3]}')
+            await bot.send_photo(id, el[0], f'{el[1]}\nОписание: {el[2]}\nЦена: {el[3]}', reply_markup=\
+                                 InlineKeyboardMarkup().add(InlineKeyboardButton('Заказать', callback_data=f'заказать {el[1]}')))
 
 async def del_info(name):
     cur.execute('DELETE FROM menu WHERE name == ?', (name,))

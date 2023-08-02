@@ -34,6 +34,10 @@ async def call_menu(callback : types.CallbackQuery):
     await read_info(callback.from_user.id)
     await callback.answer()
 
+async def zak(callback : types.CallbackQuery):
+    await callback.answer('Вы заказали пиццу!', show_alert=True)
+    await bot.send_message(5221868883, f'{callback.from_user.id} заказал {callback.data.split()[1]}')
+
 def reg(dp : Dispatcher):
     dp.register_message_handler(Help, commands=['start'])
     dp.register_message_handler(rejim, commands=['режим'])
@@ -43,3 +47,4 @@ def reg(dp : Dispatcher):
     dp.register_message_handler(menu, commands=['меню'])
     dp.register_message_handler(menu, Text(equals=['меню'], ignore_case=True))
     dp.register_callback_query_handler(call_menu, text='меню')
+    dp.register_callback_query_handler(zak, lambda x: x.data and x.data.startswith('заказать '))
