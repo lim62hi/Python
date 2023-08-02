@@ -3,7 +3,8 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from create import bot
 from aiogram import types, Dispatcher
 from keyboards.admin_kb import kb_admin, kb_onload
-from data_base.sqlite_db import load_info
+from data_base.sqlite_db import load_info, del_info
+from aiogram.dispatcher.filters import Text
 
 ID = 5221868883
 
@@ -51,10 +52,19 @@ async def load_price(message : types.message, state : FSMContext):
 async def kb(message : types.message):
     await bot.send_message(message.from_user.id, 'Вы вошли как Администратор', reply_markup=kb_admin)
 
+async def delete(callback : types.CallbackQuery):
+    name = callback.data.split()[1]
+    await del_info(name)
+    await callback.answer('Позиция в меню успешно удалена!', show_alert=True)
+
 def reg(dp : Dispatcher):
     dp.register_message_handler(load, commands=['загрузить'], state=None)
+    dp.register_message_handler(load, Text(equals=['загрузить'], ignore_case=True), state=None)
     dp.register_message_handler(cancel, commands=['отмена'], state='*')
+    dp.register_message_handler(cancel, Text(equals=['отмена'], ignore_case=True), state='*')
     dp.register_message_handler(load_photo, content_types=['photo'], state=FSM_admin.photo)
     dp.register_message_handler(load_name, state=FSM_admin.name)
     dp.register_message_handler(load_description, state=FSM_admin.description)
     dp.register_message_handler(load_price, state=FSM_admin.price)
+    dp.register_callback_query_handler(delete, lambda x: x.data and x.data.startswith('удалить '))
+ 

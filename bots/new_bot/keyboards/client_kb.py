@@ -1,7 +1,0 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardRemove, ReplyKeyboardMarkup
-
-b1 = KeyboardButton('/меню')
-b2 = KeyboardButton('/режим')
-b3 = KeyboardButton('/место')
-kb_client = ReplyKeyboardMarkup(resize_keyboard=True)
-kb_client.add(b1).row(b2, b3)
