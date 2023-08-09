@@ -49,7 +49,6 @@ async def zak(callback : types.CallbackQuery):
     pizza = ''
     call = callback.data.split()
     call.pop(0)
-    print(call)
     for i in call:
         pizza += i
     await bot.send_message(callback.from_user.id, 'Введите ваш номер телефона, который мы можем использовать для связи', reply_markup=kb_onload)
@@ -75,7 +74,7 @@ async def num_zak(message : types.message, state : FSMContext):
 async def name_zak(message : types.message, state : FSMContext):
     global dat, pizza
     dat.append(message.text)
-    await bot.send_message(5221868883, f'@{message.from_user.username} заказал {pizza}\nТелефон: {dat[0]}\nИмя: {dat[1]}')
+    await bot.send_message(5221868883, f'@{message.from_user.username} заказал {pizza.lower()}\nТелефон: {dat[0]}\nИмя: {dat[1].capitalize()}')
     await state.finish()
     if message.from_user.id == 5221868883:
         await bot.send_message(message.from_user.id, f'{dat[1]}, вы успешно заказали пиццу!', reply_markup=kb_admin)
