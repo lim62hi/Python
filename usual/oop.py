@@ -1,17 +1,46 @@
+from typing import Any
+
+
 class Point:
     'The class for points'
-    def __new__(cls, *args):
-        return super().__new__(cls)
-    def __init__(self, color = None, circle = None, x = None, y = None, *args):
-        self.set(color, circle, x, y)
-        print(f'Information about new object at {self}: color = {color}, circle = {circle}, x = {x}, y = {y}')
+    min = 0
+    def __init__(self, x = None, y = None, *args):
+        self.set(x, y)
+        print(f'Information about new object at {self}: x = {x}, y = {y}')
     def __del__(self):
-        info = self.get()
-        print(f'Delete object at {self}. Information: color = {info[0]}, circle = {info[1]}, x = {info[2]}, y = {info[3]}')
-    def set(self, color = None, circle = None, x = None, y = None):
-        self.color, self.circle, self.x, self.y = color, circle, x, y
+        info = tuple(self.get().values())
+        print(f'Delete object at {self}. Information: x = {info[0]}, y = {info[1]}')
+    def __delattr__(self, item):
+        print('An attribute was successfully deleted!')
+        object.__delattr__(self, item)
+    def __getattribute__(self, item):
+        print('An attribute was successfully gotten!')
+        object.__getattribute__(self, item)
+    def __getattr__(self, item):
+        return None
+    def __setattr__(self, name, value):
+        print('An attribute was successfully setted!')
+        object.__setattr__(name, value)
+    @staticmethod
+    def __check(num):
+        return type(num) in (int, float)
+    def set(self, x, y):
+        if self.__check(x) or self.__check(y):
+            self.__x = x
+            self.__y = y
+        else:
+            raise ValueError('Irregular numbers!')
     def get(self):
-        return self.color, self.circle, self.x, self.y
+        return {'x': self.__x, 'y': self.__y}
+    @classmethod
+    def min_class(cls, other):
+        cls.min = other
+first = Point(2, 3).min_class(5)
+
+
+
+
+
 
 class DataBase:
     'The class for different databases'
@@ -26,20 +55,17 @@ class DataBase:
     def __del__(self):
         DataBase.__instance = None
         print('Database closed')
-    def connect(self):
+    @staticmethod
+    def connect():
         print(f'DataBase connected')
-    def write(self, data = None):
+    @staticmethod
+    def write(data = None):
         if data != None:
             print(f'{data} was been written to database')
         else:
             return None
     def read(self):
         print(f'Info: {self.user}, {self.psw}')
-    def close(self):
+    @staticmethod
+    def close():
         print('Database closed')
-#first = Point('red', 2, 1, 2)
-#second = Point('black', 1, 10, 20)
-db = DataBase('lim', ',bpjy123')
-db2 = DataBase('asd', 'asdasdsadas')
-db.read()
-db2.read()
