@@ -11,7 +11,7 @@ while res!=[]:
     offset += 30
     url = f'https://yupest2.pythonanywhere.com/api/v1.0/movies/?offset={offset}'
     res = requests.get(url).json()['records']
-    films.extend(res)
+    films.append(res)
     
 print(f'Количество записей: {len(films)}')
 
