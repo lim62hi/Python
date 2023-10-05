@@ -12,7 +12,7 @@ number = None
 bot = Bot(token='6182305853:AAGxLIaLK0hN0du8H0_7kF4wmu_bQ7U-WZk')
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
-HELP = 'Привет!\n\nВ этом боте ты можешь поиграть в спортлото и обязательно выйграть миллион, а также автомобиль!\nВыбери лото, в которое ты хочешь поиграть!'
+HELP = 'Привет!\n\nВ этом боте вы можете поиграть в спортлото и обязательно выйграть миллион, а также автомобиль!\nВыберите лото, в которое вы хотите поиграть!'
 class FSM_num(StatesGroup):
     result = State()
 kb_start = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('4/20')).row(KeyboardButton('6/36'), KeyboardButton('7/49'))
