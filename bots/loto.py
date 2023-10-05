@@ -61,7 +61,7 @@ async def start_lot(num, nums1, message):
         return
     for num in nums1:
         if num < 1 or num > lot:
-            await message.reply('Вы ввели неправильные числа чисел!')
+            await message.reply('Вы ввели неправильные числа!')
             return
         else:
             if num in nums2:
@@ -95,7 +95,9 @@ async def l_start(message : types.message):
 @dp.message_handler(commands=['отмена'], state='*')
 @dp.message_handler(Text(equals=['отмена'], ignore_case=True), state='*')
 async def cancel(message : types.message, state : FSMContext):
+    global number
     await state.finish()
+    number = None
     await bot.send_message(message.from_user.id, 'Лото отменено!', reply_markup=kb_start)    
 
 @dp.message_handler(state=FSM_num.result)
