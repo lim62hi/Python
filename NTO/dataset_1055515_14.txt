@@ -1,0 +1,41 @@
+1. from flask import Flask, request, jsonify, make_response
+2. import requests
+3. from random import choice
+
+4. app = Flask(__name__)
+   # настройка поддержки кириллицы
+5. app.config['JSON_AS_ASCII'] = True
+
+   # маршрут по умолчанию
+6. @app.route('')
+7. def index():
+8.   return 'Hello from Flask!'
+
+9.def get_book(author):
+     # список книг по автору
+10.  books = requests.get(f'https://yupest2.pythonanywhere.com/api/v1.0/books/?author={author}').json()['records']
+
+     # случайная книга в диапазоне от нулевого до последнего из списка
+11.  book = choice(books)
+
+     # строка ответа бота с рекомендацией книги
+12.  return f'''{book['Название']}
+13.      Автор: {book['Автор']}
+14.      Оценка: {book['Оценка']}
+15.      Код книги: {book['code']}'''
+
+16.def get_result():
+      # извлечение параметра
+17.   req = request.get_json(force=True)
+18.   author = req['queryResult']['parameters']['authors']
+
+      # если параметр задан, вернем случайный фильм
+19.   if author:
+20.       return {'fulfillment': get_book(author)}
+
+   # маршрут webhook
+21.@app.route('/webhook', methods=['GET', 'POST'])
+22.def webhook():
+23.   return make_response(jsonify(get_result()))
+
+24.app.run(host='0.0.0.0', port=5000)

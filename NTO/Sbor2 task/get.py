@@ -8,10 +8,10 @@ res = requests.get(url).json()['records']
 
 while res!=[]:
     print(res[0]['code'])
+    films.extend(res)
     offset += 30
     url = f'https://yupest2.pythonanywhere.com/api/v1.0/movies/?offset={offset}'
     res = requests.get(url).json()['records']
-    films.append(res)
     
 print(f'Количество записей: {len(films)}')
 
