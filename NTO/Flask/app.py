@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -29,10 +29,6 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/user/<int:id>')
-def user(id):
-    return f'Your user\'s ID is {id}'
-
 @app.route('/create', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
@@ -42,14 +38,18 @@ def create():
 
         article = Article(title=title, intro=intro, text=text)
 
-        #try:
-        db.session.add(article)
-        db.session.commit()
-        return redirect('/')
-        #except:
-         #   return 'Error'
+        try:
+            db.session.add(article)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'Error'
     else:
         return render_template('create.html')
+
+@app.route('/articles/')
+def articles():
+    return  render_template('articles.html')
 
 
 if __name__ == '__main__':

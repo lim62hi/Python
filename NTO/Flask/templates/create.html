@@ -5,13 +5,13 @@ Create
 {% endblock %}
 
 {% block text %}
-<div>
+<div class="container mt-5">
     <h1>Add article</h1>
     <form method="post">
-        <input type="text" name="title" id="title"><br>
-        <textarea name="intro" id="intro"></textarea><br>
-        <textarea name="text" id="text"></textarea><br>
-        <input type="submit" value="Send">
+        <input type="text" name="title" class="form-control" id="title" placeholder="Title"><br>
+        <textarea name="intro" id="intro" class="form-control" placeholder="Intro"></textarea><br>
+        <textarea name="text" id="text" class="form-control" placeholder="Main text"></textarea><br>
+        <input type="submit" class="btn btn-success" value="Send">
     </form>
 </div>
 {% endblock %}
