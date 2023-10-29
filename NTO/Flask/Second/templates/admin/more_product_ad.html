@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h2>{{ product.title }}</h2>
+    <div class="alert alert-info">
+        <h5>{{ product.intro }}</h5>
+        <p>{{ product.text }}</p>
+        <p><b>Date: {{ product.date.date() }}</b></p>
+        <a href="/products/del/{{ product.id }}" class="btn btn-danger">Удалить</a>
+        <a href="/products/upd/{{ product.id }}" class="btn btn-success">Обновить</a>
+    </div>
+</div>
+{% endblock %}

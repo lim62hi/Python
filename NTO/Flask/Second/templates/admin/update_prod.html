@@ -1,0 +1,13 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1>Редактировать товар</h1>
+    <form method="post">
+        <input type="text" class="form-control" name="title" id="title" value="{{ product.title }}" placeholder="Заголовок"><br>
+        <textarea name="intro" id="intro" class="form-control" placeholder="Вступительная часть">{{ product.intro }}</textarea><br>
+        <textarea name="text" id="text" class="form-control" placeholder="Описание">{{ product.text }}</textarea><br>
+        <input type="submit" class="btn btn-success" value="Сохранить">
+    </form>
+</div>
+{% endblock %}

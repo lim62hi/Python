@@ -1,0 +1,19 @@
+{% extends 'user/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1>Наш великолепный персонал:</h1><br>
+    {% if staff|length > 0 %}
+        {% for el in staff %}
+        <div class="alert alert-info">
+            <h2>{{ el.last }}</h2>
+            <p>{{ el.name }}</p>
+            <p><b>Дата: {{ el.date.date() }}</b></p>
+            <a class="btn btn-warning" href="/staff/{{ more }}/{{ el.id }}">Детальнее</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>У нас нет персонала!</p>
+    {% endif %}
+</div>
+{% endblock %}

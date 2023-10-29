@@ -1,0 +1,18 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1>Наш замечательный персонал:</h1><br>
+    {% if staff|length > 0 %}
+        {% for el in staff %}
+        <div class="alert alert-info">
+            <h2>{{ el.last }} {{ el.name }}</h2>
+            <p><b>Дата: {{ el.date.date() }}</b></p>
+            <a class="btn btn-warning" href="/about/6VKBw7X$ThNcFy&/{{ el.id }}">Детальнее</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>У нас нет персонала!</p>
+    {% endif %}
+</div>
+{% endblock %}

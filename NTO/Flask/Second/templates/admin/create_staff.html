@@ -1,0 +1,13 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1>Добавить персонал</h1>
+    <form method="post">
+        <input type="text" name="name" class="form-control" id="name" placeholder="Имя" required><br>
+        <textarea name="last" id="last" class="form-control" placeholder="Фамилия" required></textarea><br>
+        <textarea name="text" id="text" class="form-control" placeholder="Описание" required></textarea><br>
+        <input type="submit" class="btn btn-success" value="Отправить">
+    </form>
+</div>
+{% endblock %}
