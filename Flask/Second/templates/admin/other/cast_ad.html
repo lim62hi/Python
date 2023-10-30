@@ -1,0 +1,13 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1>Данные для оплаты: {{ cast }}₽</h1><br>
+    <form method="post">
+        <input type="text" class="form-control" name="card" id="card" placeholder="Номер карты: 0000 0000 0000" required><br>
+        <input type="text" class="form-control" name="mail" id="mail" placeholder="Почта: artem@mail.ru" required><br>
+        <input type="text" class="form-control" name="number" id="number" placeholder="Телефон: 8 999 999 99 99" required><br>
+        <a class="btn btn-success" href="/6VKBw7X$ThNcFy&">Оплатить</a>
+    </form>
+</div>
+{% endblock %}

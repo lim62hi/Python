@@ -1,0 +1,12 @@
+{% extends 'user/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h2>{{ stafs.last }} {{ stafs.name }}</h2>
+    <div class="alert alert-info">
+        <h5>Возраст: {{ stafs.age }}</h5>
+        <p>{{ stafs.text }}</p>
+        <p><b>Начало работы: {{ stafs.date.date() }}</b></p>
+    </div>
+</div>
+{% endblock %}

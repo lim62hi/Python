@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1>Редактировать персонал</h1>
+    <form method="post">
+        <input type="text" class="form-control" name="last" id="last" placeholder="Фамилия" value="{{ staff.last }}" required><br>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Имя" value="{{ staff.name }}" required><br>
+        <input type="text" class="form-control" name="age" id="age" placeholder="Возраст" value="{{ staff.age }}" required><br>
+        <textarea class="form-control" name="text" id="text" placeholder="Описание человека" required>{{ staff.text }}</textarea><br>
+        <input type="submit" class="btn btn-success" value="Сохранить">
+    </form>
+</div>
+{% endblock %}

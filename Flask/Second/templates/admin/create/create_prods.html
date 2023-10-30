@@ -1,0 +1,16 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1>Добавить товар</h1>
+    <form method="post">
+        <input type="text" class="form-control" name="title" id="title" placeholder="Заголовок" required><br>
+        <input type="text" class="form-control" name="cast" id="cast" placeholder="Цена рублей" required><br>
+        <textarea type="text" class="form-control" name="text" id="text" placeholder="Описание товара" required></textarea><br>
+        <input type="text" class="form-control" name="place" id="place" placeholder="Место сделки" required><br>
+        <input type="text" class="form-control" name="HELP" id="HELP" placeholder="Поддержка" required><br>
+        <input type="text" class="form-control" name="button" id="button" placeholder="Кнопка покупки" required><br>
+        <input type="submit" class="btn btn-success" value="Отправить">
+    </form>
+</div>
+{% endblock %}

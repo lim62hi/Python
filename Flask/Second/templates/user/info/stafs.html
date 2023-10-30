@@ -3,13 +3,12 @@
 {% block main %}
 <div class="container mt-5">
     <h1>Наш великолепный персонал:</h1><br>
-    {% if staff|length > 0 %}
-        {% for el in staff %}
+    {% if stafs|length > 0 %}
+        {% for el in stafs %}
         <div class="alert alert-info">
-            <h2>{{ el.last }}</h2>
-            <p>{{ el.name }}</p>
-            <p><b>Дата: {{ el.date.date() }}</b></p>
-            <a class="btn btn-warning" href="/staff/{{ more }}/{{ el.id }}">Детальнее</a>
+            <h2>{{ el.last }} {{ el.name }}</h2>
+            <p><b>Начало работы: {{ el.date.date() }}</b></p>
+            <a class="btn btn-warning" href="/stafs/{{ more }}/{{ el.id }}">Детальнее</a>
         </div>
         {% endfor %}
     {% else %}

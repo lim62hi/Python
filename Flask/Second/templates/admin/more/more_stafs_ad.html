@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+    <h2>{{ staff.last }} {{ staff.name }}</h2>
+    <div class="alert alert-info">
+        <h5>Возраст: {{ staff.age }}</h5>
+        <p>{{ staff.text }}</p>
+        <p><b>Начало работы: {{ staff.date.date() }}</b></p>
+        <a href="/stafs/del/{{ staff.id }}" class="btn btn-danger">Удалить</a>
+        <a href="/stafs/upd/{{ staff.id }}" class="btn btn-success">Обновить</a>
+    </div>
+</div>
+{% endblock %}
